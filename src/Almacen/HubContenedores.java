@@ -46,57 +46,55 @@ public class HubContenedores {
         if (this.c != null) {
             switch (cont.getPrioridad()) {
 
-                        case 1:
-                            for (i = 0; i < this.nFilas; i++) {
-                                if (this.c[i][this.nColumnas - 1] == null) {
-                                    revisar = true;
-                                    break;  //break1
-                                }
-                            }
-                            //Aqui llega el break1
-                            if (revisar)
-                                this.c[i][nColumnas - 1] = cont;
+                case 1:
+                    for (i = 0; i < this.nFilas; i++) {
+                        if (this.c[i][this.nColumnas - 1] == null) {
+                            revisar = true;
+                            break;  //break1
+                        }
+                    }
+                    //Aqui llega el break1
+                    if (revisar)
+                        this.c[i][nColumnas - 1] = cont;
 
-                            break; //break2
-                        case 2:
+                    break; //break2
+                case 2:
 
-                            for (i = 0; i < this.nFilas; i++) {
-                                if (this.c[i][this.nColumnas - 2] == null) {
-                                    revisar = true;
-                                    break;  //break1
-                                }
-
-                            }
-
-                            if (revisar)
-                                this.c[i][nColumnas-2] = cont;
-
-                            break; //break2
-
-
-                        case 3:
-                            for (i = 0; i < nFilas; i++) {
-                                for (int l = nColumnas - cont.getPrioridad(); l > 0; l--) {
-                                    if (this.c[i][l] == null) {
-                                        if (!revisar) {
-                                            this.c[i][l] = cont;
-                                            revisar = !revisar;
-                                        }
-
-
-                                    }
-
-
-                                }
-
-                            }
-
+                    for (i = 0; i < this.nFilas; i++) {
+                        if (this.c[i][this.nColumnas - 2] == null) {
+                            revisar = true;
+                            break;  //break1
+                        }
 
                     }
+
+                    if (revisar)
+                        this.c[i][nColumnas - 2] = cont;
+
+                    break; //break2
+
+
+                case 3:
+                    for (i = 0; i < nFilas; i++) {
+                        for (int l = nColumnas - cont.getPrioridad(); l > 0; l--) {
+                            if (this.c[i][l] == null) {
+                                if (!revisar) {
+                                    this.c[i][l] = cont;
+                                    revisar = !revisar;
+                                }
+
+
+                            }
+
+
+                        }
+
+                    }
+
+
             }
         }
-
-
+    }
 
 
     public void desapilar(int prioridad) {
@@ -117,9 +115,7 @@ public class HubContenedores {
             }
 
 
-
-        }
-        else {
+        } else {
             for (i = 0; i < nFilas; i++) {
                 for (j = nColumnas - prioridad; j >= 0; j--) {
 
@@ -137,7 +133,6 @@ public class HubContenedores {
                     break;
                 }
             }
-
 
 
         }
@@ -197,6 +192,57 @@ public class HubContenedores {
         return "hay" + " " + cont + " de " + pais;
 
 
+    }
+
+    public float pesototal() {
+        float total = 0;
+        if (this.c != null) {
+            try {
+                for (int i = 0; i < nFilas; i++) {
+
+                    for (int j = nColumnas - 1; j >= 0; j--) {
+
+                        if (c[i][j] == null) {
+                            total += 0;
+
+                        } else {
+                            total += c[i][j].getPeso();
+
+                        }
+
+                    }
+
+                }
+            } catch (NullPointerException ex) {
+
+            }
+
+
+        }
+        return total;
+    }
+
+    public String mostraridpeso() {
+        String s = "";
+
+        for (int i = 0; i < nFilas; i++) {
+                s+="\n";
+            for (int j = nColumnas - 1; j >= 0; j--) {
+
+                if (c == null || c[i][j] == null) {
+                    s += "|" + "\t";
+
+                } else {
+
+                    s+=c[i][j].getId()+"-"+c[i][j].getPeso()+"\t";
+
+                }
+
+            }
+
+        }
+
+        return s;
     }
 }
 
